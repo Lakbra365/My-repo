@@ -7,7 +7,15 @@
 
 using namespace std;
 
+map<string, int> locations()
+{
+	map<string, int> distances;
+	distances = { {"PHL", 160},
+	{"ORD", 640},
+	{"EWR", 220} };
 
+	return distances;
+}
 class Plane
 {
 protected:
@@ -105,13 +113,13 @@ public:
 	{
 
 	}
-	void setVel()
+	void setVel(double inputVel)
 	{
-
+		vel = inputVel;
 	}
-	void setLoiter()
+	void setLoiter(double inputLoiter)
 	{
-
+		loiter_time = inputLoiter;
 	}
 	double distance_to_SCE()
 	{
@@ -192,12 +200,4 @@ void printMap(map<T, U> mapa)
 	cout << "\b}";
 }
 
-map<string, int> locations()
-{
-	map<string, int> distances;
-	distances = { {"PHL", 160},
-	{"ORD", 640},
-	{"EWR", 220} };
 
-	return distances;
-}
