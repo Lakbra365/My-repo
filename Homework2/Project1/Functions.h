@@ -120,7 +120,7 @@ public:
 			return distance - pos;
 		}
 	}
-	virtual void time_on_ground()
+	virtual double time_on_ground()
 	{
 
 	}
@@ -134,6 +134,48 @@ public:
 		mt19937 gen{ rd() };
 		normal_distribution<> d{ mean,std };
 		return d(gen);
+	}
+};
+
+class Airliner : Plane
+{
+private:
+	string airline;
+public:
+	Airliner(string airlineI, string from, string to) : Plane(from, to)
+	{
+		airline = airlineI;
+	}
+	~Airliner()
+	{
+
+	}
+	string plane_type()
+	{
+		return airline;
+	}
+	double time_on_ground()
+	{
+		wait_time = draw_from_normal_dist(1800, 600);
+		return wait_time;
+	}
+};
+
+class GeneralAviation : Plane
+{
+public:
+	GeneralAviation(string from, string to): Plane(from,to)
+	{
+
+	}
+	~GeneralAviation()
+	{
+
+	}
+	double time_on_ground()
+	{
+		wait_time = draw_from_normal_dist(600, 60);
+		return wait_time;
 	}
 };
 
