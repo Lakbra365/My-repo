@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <map>
+#include <vector>
 #include <string>
 #include "Functions.h"
 
@@ -11,33 +12,34 @@ void question1()
 	printMap(locations());
 }
 
-template <typename T>
 void question5()
 {
 	double timeStep = 25;
-	map<T, double> planesInstantiated
+	vector<pair<Plane*, double>> planesInstantiated
 	{
-		{Airliner("AA", "PHL", "SCE"), 470},
-		{Airliner("UA", "ORD", "SCE"),515},
-		{Airliner("UA", "EWR", "SCE"),480},
-		{Airliner("AA", "ORD", "SCE"),500},
-		{GeneralAviation("PHL", "SCE"),140},
-		{GeneralAviation("EWR", "SCE"),160},
-		{GeneralAviation("ORD", "SCE"),180}
+		{new Airliner("AA", "PHL", "SCE"), 470},
+		{new Airliner("UA", "ORD", "SCE"),515},
+		{new Airliner("UA", "EWR", "SCE"),480},
+		{new Airliner("AA", "ORD", "SCE"),500},
+		{new GeneralAviation("PHL", "SCE"),140},
+		{new GeneralAviation("EWR", "SCE"),160},
+		{new GeneralAviation("ORD", "SCE"),180}
 	};
-
+	
 	for (auto element : planesInstantiated)
 	{
-		element.first.setVel(element.second);
+		element.first->setVel(element.second);
 	}
 
-	while (true)
+
+	while(true)
 	{
 		double planeNum = 1;
 		for (auto element : planesInstantiated)
 		{
-			element.first.operate(timeStep);
-			cout << "Plane" << planeNum <<" pos: "<< element.first.pos<< endl;
+			element.first->operate(timeStep);
+			cout << "Plane" << planeNum <<" pos: "<< element.first->getPos()<< endl;
+			planeNum += 1;
 		}
 		
 	}

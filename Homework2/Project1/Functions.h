@@ -31,13 +31,13 @@ public:
 		origin = from;
 		destination = to;
 		pos, vel, wait_time, loiter_time, at_SCE = 0;
-		if (distancesMap.find(from) == distancesMap.end())
+		if (origin == "SCE")
 		{
-			distance = distancesMap.find(from)->second;
+			distance = distancesMap.find(destination)->second;
 		}
 		else
 		{
-			distance = distancesMap.find(to)->second;
+			distance = distancesMap.find(origin)->second;
 		}
 	}
 	virtual ~Plane()
@@ -91,27 +91,27 @@ public:
 	}
 	double getPos()
 	{
-
+		return pos;
 	}
 	double getVel()
 	{
-
+		return vel;
 	}
 	double getLoiter()
 	{
-
+		return loiter_time;
 	}
 	string getOrigin()
 	{
-
+		return origin;
 	}
 	string getDestination()
 	{
-
+		return destination;
 	}
 	bool getSCE()
 	{
-
+		return at_SCE;
 	}
 	void setVel(double inputVel)
 	{
@@ -130,7 +130,7 @@ public:
 	}
 	virtual double time_on_ground()
 	{
-
+		return wait_time;
 	}
 	virtual string plane_type()
 	{
@@ -145,7 +145,7 @@ public:
 	}
 };
 
-class Airliner : Plane
+class Airliner : public Plane
 {
 private:
 	string airline;
@@ -169,7 +169,7 @@ public:
 	}
 };
 
-class GeneralAviation : Plane
+class GeneralAviation : public Plane
 {
 public:
 	GeneralAviation(string from, string to): Plane(from,to)
@@ -199,5 +199,8 @@ void printMap(map<T, U> mapa)
 	}
 	cout << "\b}";
 }
+
+
+
 
 

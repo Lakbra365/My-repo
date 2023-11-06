@@ -1,4 +1,2 @@
 ﻿  Hw2.cpp
-C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\Homework2\Project1\Hw2.cpp(9,2): error C2672: 'question5': no matching overloaded function found
-C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\Homework2\Project1\Hw2.cpp(9,2): error C2783: 'void question5(void)': could not deduce template argument for 'T'
-C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\Homework2\Project1\questions.h(15): message : see declaration of 'question5'
+  Project1.vcxproj -> C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\Homework2\Debug\Project1.exe
