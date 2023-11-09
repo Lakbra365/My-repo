@@ -29,6 +29,8 @@ void question5()
 	for (auto element : planesInstantiated)
 	{
 		element.first->setVel(element.second);
+		element.first->setLoiter(20);
+		element.first->time_on_ground();
 	}
 
 

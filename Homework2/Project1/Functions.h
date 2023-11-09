@@ -16,6 +16,7 @@ map<string, int> locations()
 
 	return distances;
 }
+
 class Plane
 {
 protected:
@@ -77,14 +78,11 @@ public:
 					{
 						at_SCE = 1;
 					}
-					else
-					{
-						time_on_ground();
-						string placeholder = origin;
-						origin = destination;
-						destination = placeholder;
-						pos = 0.0;
-					}
+					time_on_ground();
+					string placeholder = origin;
+					origin = destination;
+					destination = placeholder;
+					pos = 0.0;
 				}
 			}
 		}
@@ -184,6 +182,61 @@ public:
 	{
 		wait_time = draw_from_normal_dist(600, 60);
 		return wait_time;
+	}
+};
+
+class ATC
+{
+private:
+	unsigned int MAX_LANDED_PLANE_NUM = 2;
+	unsigned int AIRSPACE_DISTANCE = 50;
+	vector<Plane*> registered_planes
+	{
+		{new Airliner("AA", "PHL", "SCE")},
+		{new Airliner("UA", "ORD", "SCE")},
+		{new Airliner("UA", "EWR", "SCE")},
+		{new Airliner("AA", "ORD", "SCE")},
+		{new GeneralAviation("PHL", "SCE")},
+		{new GeneralAviation("EWR", "SCE")},
+		{new GeneralAviation("ORD", "SCE")}
+	};
+public:
+	ATC()
+	{
+
+	}
+	~ATC()
+	{
+
+	}
+	void register_plane(Plane* newPlane)
+	{
+		registered_planes.push_back(newPlane);
+	}
+	void control_traffic()
+	{
+		unsigned int landed_planes = 0;
+		unsigned int i = 0;
+		while (i< registered_planes.size())
+		{
+			landed_planes += registered_planes[i]->getSCE();
+			i++;
+		}
+		if (landed_planes >= MAX_LANDED_PLANE_NUM)
+		{
+			i = 0;
+			while (i < registered_planes.size())
+			{
+				bool x = registered_planes[i]->getSCE();
+				double y = registered_planes[i]->distance_to_SCE();
+				double z = registered_planes[i]->getLoiter();
+				if ( x == 0 && y <= AIRSPACE_DISTANCE && z == 0 )
+				{
+					registered_planes[i]->setLoiter(100);
+					i++;
+				}
+			}
+		}
 	}
 };
 
