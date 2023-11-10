@@ -25,14 +25,16 @@ void question5()
 		{new GeneralAviation("EWR", "SCE"),160},
 		{new GeneralAviation("ORD", "SCE"),180}
 	};
-	
+	ATC atc;
+
 	for (auto element : planesInstantiated)
 	{
 		element.first->setVel(element.second);
 		element.first->setLoiter(20);
 		element.first->time_on_ground();
+		atc.register_plane(element.first);
 	}
-
+	
 
 	while(true)
 	{
@@ -40,6 +42,7 @@ void question5()
 		for (auto element : planesInstantiated)
 		{
 			element.first->operate(timeStep);
+			atc.control_traffic();
 			cout << "Plane" << planeNum <<" pos: "<< element.first->getPos()<< endl;
 			planeNum += 1;
 		}

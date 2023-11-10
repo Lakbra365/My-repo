@@ -192,13 +192,7 @@ private:
 	unsigned int AIRSPACE_DISTANCE = 50;
 	vector<Plane*> registered_planes
 	{
-		{new Airliner("AA", "PHL", "SCE")},
-		{new Airliner("UA", "ORD", "SCE")},
-		{new Airliner("UA", "EWR", "SCE")},
-		{new Airliner("AA", "ORD", "SCE")},
-		{new GeneralAviation("PHL", "SCE")},
-		{new GeneralAviation("EWR", "SCE")},
-		{new GeneralAviation("ORD", "SCE")}
+		
 	};
 public:
 	ATC()
