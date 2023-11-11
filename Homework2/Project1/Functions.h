@@ -27,6 +27,7 @@ private:
 	string origin, destination;
 	map<string, int> distancesMap = locations();
 public:
+	string planeType;
 	Plane(string from, string to)
 	{
 		origin = from;
@@ -148,6 +149,7 @@ class Airliner : public Plane
 private:
 	string airline;
 public:
+	string planeType = "Airliner";
 	Airliner(string airlineI, string from, string to) : Plane(from, to)
 	{
 		airline = airlineI;
@@ -170,6 +172,7 @@ public:
 class GeneralAviation : public Plane
 {
 public:
+	string planeType = "General Aviation";
 	GeneralAviation(string from, string to): Plane(from,to)
 	{
 

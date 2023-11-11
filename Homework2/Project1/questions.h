@@ -5,6 +5,7 @@
 #include <string>
 #include "Functions.h"
 
+
 using namespace std;
 
 void question1()
@@ -43,6 +44,8 @@ void question5()
 		{
 			element.first->operate(timeStep);
 			atc.control_traffic();
+			
+
 			cout << "Plane" << planeNum <<" pos: "<< element.first->getPos()<< endl;
 			planeNum += 1;
 		}
