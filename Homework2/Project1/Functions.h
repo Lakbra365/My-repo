@@ -27,7 +27,6 @@ private:
 	string origin, destination;
 	map<string, int> distancesMap = locations();
 public:
-	string planeType;
 	Plane(string from, string to)
 	{
 		origin = from;
@@ -70,11 +69,14 @@ public:
 			{
 				if (pos < distance)
 				{
+					
 					pos += vel * dt;
 					at_SCE = 0;
+					
 				}
 				else
 				{
+					
 					if (destination == "SCE")
 					{
 						at_SCE = 1;
@@ -149,7 +151,7 @@ class Airliner : public Plane
 private:
 	string airline;
 public:
-	string planeType = "Airliner";
+	
 	Airliner(string airlineI, string from, string to) : Plane(from, to)
 	{
 		airline = airlineI;
@@ -172,7 +174,7 @@ public:
 class GeneralAviation : public Plane
 {
 public:
-	string planeType = "General Aviation";
+	
 	GeneralAviation(string from, string to): Plane(from,to)
 	{
 
@@ -184,6 +186,7 @@ public:
 	double time_on_ground()
 	{
 		wait_time = draw_from_normal_dist(600, 60);
+		
 		return wait_time;
 	}
 };
