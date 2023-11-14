@@ -1,25 +1,35 @@
 #pragma once
-#include <iostream>
-#include <fstream>
-#include <sstream>
+
 #include <regex>
 #include <string>
 #include <vector>
+#include <fstream>
+
 using namespace std;
 
-void parseCSVData(ifstream& infile, vector<vector<string>>& generalData)
+class DataManager
 {
-    string line;
-    while (getline(infile,line,'\n'))
-    {
-        vector<string> row;
-        stringstream lineStream(line);
-        string value;
+private:
+public:
+    void parseSpecificData(regex regexP, vector<int>& specificData);
+};
 
-        while (getline(lineStream, value, ','))
-        {
-            row.push_back(value);
-        }
-        generalData.push_back(row);
-    }
-}
+class structure
+{
+private:
+    string buildingBlock;
+public:
+    structure(string type);
+};
+
+class PlotDrawing
+{
+
+};
+class PlotData
+{
+private:
+    vector<double> xData, yData;
+public:
+    PlotData(vector<double> xData, vector<double> yData);
+};

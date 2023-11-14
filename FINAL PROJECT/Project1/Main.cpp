@@ -1,22 +1,18 @@
 #include "DataFuncs.h"
+#include <iostream>
 
 using namespace std; 
 int main()
 {
-	ifstream infile;
-	infile.open("csvText.txt");
-	vector<vector<string>>generalData;
-	
-	parseCSVData(infile, generalData);
+	DataManager test;
+	regex pattern("G$");
+	vector<int> specificData;
+	test.parseSpecificData(pattern, specificData);
 
 	cout << "[";
-	for (const auto& row : generalData) {
-		cout << "[";
-		for (const auto& value : row) {
-			cout << value <<", ";
-		}
-
-		cout <<"]" << endl;
+	for (const auto& row : specificData) 
+	{
+		cout << row <<", ";
 	}
 	cout << "]";
 	
