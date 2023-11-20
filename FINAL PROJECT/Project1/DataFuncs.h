@@ -16,7 +16,7 @@ class VIZ
 public:
     VIZ();
 
-    void drawRect(double posY, double width, double posX = 40, double height = 10);
+    void drawRect(double posY, double width, double posX = 100, double height = 10);
 };
 
 class DataManager

@@ -1,1 +1,8 @@
-﻿  Project1.vcxproj -> C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Debug\Project1.exe
+﻿  Logic classes.cpp
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(39,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(48,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(84,14): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(85,14): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(86,14): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(87,14): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  Project1.vcxproj -> C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Debug\Project1.exe
