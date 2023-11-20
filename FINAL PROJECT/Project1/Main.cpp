@@ -1,12 +1,20 @@
 #include "DataFuncs.h"
 #include <iostream>
+#include <SDL.h>
 
 using namespace std; 
-int main()
+int main(int argc, char** argv)
 {
+	VIZ viz;
+	viz.drawRect(200, 500);
+	while (true)
+	{
+
+	}
+	/* THIS CONTAINS THE TEST FOR GETTING DATA PARSED INTO A SINGLE
 	DataManager test;
 	regex pattern("G$");
-	vector<int> specificData;
+	vector<double> specificData;
 	test.parseSpecificData(pattern, specificData);
 
 	cout << "[";
@@ -14,6 +22,6 @@ int main()
 	{
 		cout << row <<", ";
 	}
-	cout << "]";
-	
+	cout << "]";*/
+	return 0;
 }

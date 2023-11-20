@@ -2,9 +2,13 @@
 #include <iostream>
 #include <sstream>
 
+#define WIDTH 1366
+#define HEIGHT 803
+
+
 using namespace std;
 
-void parseCSVData(ifstream& infile, vector<vector<string>>& generalData) //Gets a csv file and turns it into a 2D list
+void DataManager :: parseCSVData(ifstream& infile) //Gets a csv file and turns it into a 2D list
 {
     string line;
     while (getline(infile, line, '\n')) //Makes each line a part of a vector
@@ -21,19 +25,16 @@ void parseCSVData(ifstream& infile, vector<vector<string>>& generalData) //Gets 
     }
 }
 
-structure::structure(string type)
-{
-    buildingBlock = type;
-}
 
-void DataManager::parseSpecificData(regex regexP, vector<int>& specificData) //Makes a list of values based on a regex condition of a 2D list
+void DataManager::parseSpecificData(regex regexP, vector<double>& specificData) //Makes a list of values based on a regex condition of a 2D list
 {
     int indexDesired = -1;
 
+    //remove after test
     ifstream infile;
     infile.open("csvText.txt");
-    vector<vector<string>> generalData;
-    parseCSVData(infile, generalData);
+    parseCSVData(infile);
+    //end remove
 
     for (int i = 0; i < generalData[0].size(); i++)
     {
@@ -50,8 +51,41 @@ void DataManager::parseSpecificData(regex regexP, vector<int>& specificData) //M
     }
 }
 
-PlotData::PlotData(vector<double> xData, vector<double> yData)
+Plot::Plot(regex command)
 {
-    this->xData = xData;
-    this->yData = yData;
+    parseSpecificData(command, xData);
+}
+
+VIZ::VIZ()
+{
+    // returns zero on success else non-zero
+    if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
+    {
+        printf("error initializing SDL: %s\n", SDL_GetError());
+    }
+
+    win = SDL_CreateWindow("Football Stats", // creates a window
+        SDL_WINDOWPOS_CENTERED,
+        SDL_WINDOWPOS_CENTERED,
+        WIDTH, HEIGHT, 0);
+    renderer = SDL_CreateRenderer(win, -1, 0);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
+    SDL_RenderClear(renderer);
+
+    //SDL_RenderPresent(renderer);
+}
+
+void VIZ::drawRect(double posY, double width, double posX, double height)
+{
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
+    SDL_Rect rect;
+    rect.x = posX;
+    rect.y = posY;
+    rect.w = width;
+    rect.h = height;
+
+    SDL_RenderFillRect(renderer, &rect);
+    SDL_RenderPresent(renderer);
 }

@@ -13,8 +13,13 @@ HW2_VIZ::HW2_VIZ ()
                                        SDL_WINDOWPOS_CENTERED,
                                        WIDTH, HEIGHT, 0 );
   renderer = SDL_CreateRenderer ( win, -1, 0 );
-  image = SDL_LoadBMP ( "map.bmp" ); // this depends on where you run the binary file
+  SDL_SetRenderDrawColor(renderer, 0, 255, 255, 255);
+
+  SDL_RenderClear(renderer);
+
+  //image = SDL_LoadBMP ( "map.bmp" ); // this depends on where you run the binary file
   texture = SDL_CreateTextureFromSurface ( renderer, image );
+  SDL_RenderPresent(renderer);
 }
 
 void HW2_VIZ::update (double dt)

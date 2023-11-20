@@ -1,3 +1,11 @@
-﻿  Hw2.cpp
-C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\Homework2\Project1\Functions.h(131): warning C4715: 'Plane::distance_to_SCE': not all control paths return a value
+﻿  HW2_Visualizer.cpp
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\Homework2\Project1\HW2_Visualizer.cpp(36,13): warning C4244: 'argument': conversion from 'double' to 'Uint32', possible loss of data
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\Homework2\Project1\HW2_Visualizer.cpp(53,38): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\Homework2\Project1\HW2_Visualizer.cpp(54,38): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\Homework2\Project1\HW2_Visualizer.cpp(87,67): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\Homework2\Project1\HW2_Visualizer.cpp(88,67): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\Homework2\Project1\HW2_Visualizer.cpp(91,67): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\Homework2\Project1\HW2_Visualizer.cpp(92,67): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\Homework2\Project1\HW2_Visualizer.cpp(95,67): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\Homework2\Project1\HW2_Visualizer.cpp(96,67): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
   Project1.vcxproj -> C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\Homework2\Debug\Project1.exe

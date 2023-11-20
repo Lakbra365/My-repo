@@ -9,7 +9,12 @@ using namespace std;
 int main(int argc, char** argv)
 {
 	HW2_VIZ viz;
-	double timeStep = 10;
+
+	while (true)
+	{
+
+	}
+	/*double timeStep = 10;
 	vector<pair<Plane*, double>> planesInstantiated
 	{
 		{new Airliner("AA", "PHL", "SCE"), 470/60},
@@ -42,6 +47,6 @@ int main(int argc, char** argv)
 			planeNum += 1;
 		}
 		viz.update(timeStep);
-	}
+	}*/
 	return 0;
 }

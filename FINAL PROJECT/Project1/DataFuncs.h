@@ -4,32 +4,37 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include "SDL.h"
 
 using namespace std;
+
+class VIZ
+{
+    SDL_Window* win;
+    SDL_Renderer* renderer;
+
+public:
+    VIZ();
+
+    void drawRect(double posY, double width, double posX = 40, double height = 10);
+};
 
 class DataManager
 {
 private:
+    vector<vector<string>> generalData;
 public:
-    void parseSpecificData(regex regexP, vector<int>& specificData);
+    void parseSpecificData(regex regexP, vector<double>& specificData);
+    void parseCSVData(ifstream& infile);
 };
 
-class structure
+
+class Plot: public DataManager
 {
 private:
-    string buildingBlock;
+    string labels;
+    vector<double> xData;
 public:
-    structure(string type);
-};
-
-class PlotDrawing
-{
-
-};
-class PlotData
-{
-private:
-    vector<double> xData, yData;
-public:
-    PlotData(vector<double> xData, vector<double> yData);
+    Plot(regex command);
+    
 };
