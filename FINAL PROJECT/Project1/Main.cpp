@@ -21,6 +21,8 @@ int main(int argc, char** argv)
 	Plot plot(specificData);
 	//code for drawing plot ends here
 	bool quit = false;
+
+	//Handling of quit events
 	while (!quit)
 	{
 		SDL_Event event;
@@ -30,6 +32,7 @@ int main(int argc, char** argv)
 			{
 				// Set the quit flag to true
 				quit = true;
+				TTF_Quit();
 				break;
 			}
 		}

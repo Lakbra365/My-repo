@@ -5,6 +5,7 @@
 #include <vector>
 #include <fstream>
 #include "SDL.h"
+#include "SDL_ttf.h"
 
 
 
@@ -20,7 +21,6 @@ protected:
     double xLimit;
     double yLimit;
     double standardStart = 100;
-    TTF_Font* font;
 
 public:
     VIZ();

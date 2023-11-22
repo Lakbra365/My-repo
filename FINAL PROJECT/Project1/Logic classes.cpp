@@ -1,7 +1,9 @@
 #include "DataFuncs.h"
 #include <iostream>
 #include <sstream>
-#include <SDL_ttf.h>
+#include <cmath>
+#include <iomanip>
+
 
 
 #define WIDTH 1366
@@ -73,13 +75,6 @@ VIZ::VIZ()
         printf("error initializing SDL_ttf: %s\n", TTF_GetError());
         return;
     }
-    font = TTF_OpenFont("C:/Users/zombi/Documents/My folders/Classes/3 semester/AERSP 424/Homework2/My-repo/FINAL PROJECT/Project1/OpenSans_SemiCondensed-Regular.ttf", 16);
-    if (!font)
-    {
-        printf("error loading font: %s\n", TTF_GetError());
-        TTF_Quit();
-        return;
-    }
 
     win = SDL_CreateWindow("Football Stats", // creates a window
         SDL_WINDOWPOS_CENTERED,
@@ -107,9 +102,16 @@ void VIZ::drawRect(double posY, double width, double posX, double height) //Crea
     SDL_RenderPresent(renderer);
 }
 
-void VIZ::drawText(double posX, double posY, string text)
+void VIZ::drawText(double posX, double posY, string text) //All necessary code for rendering a line of text in SDL window
 {
-
+    //Font file location
+    TTF_Font* font = TTF_OpenFont("C:/Users/zombi/Documents/My folders/Classes/3 semester/AERSP 424/Homework2/My-repo/FINAL PROJECT/Project1/OpenSans_SemiCondensed-Regular.ttf", 16);
+    if (!font) 
+    {
+        printf("error loading font: %s\n", TTF_GetError());
+        TTF_Quit();
+        return;
+    }
     SDL_Color textColor = { 0,0,0,255 };
 
     SDL_Surface* textSurface = TTF_RenderText_Solid(font, text.c_str(), textColor); // Render the desired text
@@ -142,7 +144,6 @@ void VIZ::drawText(double posX, double posY, string text)
 
     // Clean up font resources
     TTF_CloseFont(font);
-    TTF_Quit();
 }
 
 
@@ -173,31 +174,31 @@ void Plot::getMinMax() //Gets min and max values of the yData set
 
 void Plot::drawPlot() //Draws the base plot for the data
 {
-    const double conversionRate = (yLimit / 100);
+    const double numberTicks = (yLimit / 50); 
+    double width = 10;
+    double tickX = standardStart - width;
+    double tickY = standardStart;
 
-    drawRect(standardStart, 10, standardStart, yLimit);
+    drawRect(standardStart, 10, standardStart, yLimit); //Axes
     drawRect(standardStart + yLimit, xLimit, standardStart, 10);
 
-    for (int i = 0; i < conversionRate; i++)
+    for (int i = 0; i < numberTicks; i++) // Axis Y ticks & numbers
     {
-        double width = 10;
-        double tickX = standardStart - width;
-        double tickY = standardStart * (i + 1);
-        string numberLabel = to_string(int(maxVal - ((maxVal / conversionRate) * i)));
-
+        string numberLabel = to_string(int(maxVal - ((maxVal / numberTicks) * i)));
         drawRect(tickY, width, tickX, 1);
         drawText(tickX - 20, tickY -12, numberLabel);
+        tickY += yLimit / numberTicks;
     }
 }
 
 void Plot::drawBars()//Draws the bars for each given data point
 {
-    const double conversionRate = yLimit / maxVal;
+    const double conversionRate = yLimit / maxVal; //Proportionality constant between height and values
     const double barWidth = 20;
     const double barSeparation = (xLimit - (barWidth*yData.size()))/yData.size();
     
 
-    for (int i = 0; i < yData.size(); i++)
+    for (int i = 0; i < yData.size(); i++) //Bars
     {
         double xPos = standardStart + (barWidth*i) +(barSeparation* (i+1));
         double height = yData[i] * conversionRate;
