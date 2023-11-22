@@ -37,6 +37,8 @@ private:
 public:
     Plot(vector<double> Data);
     void drawPlot();
+    void drawYticks();
+    void drawXticks(double xPos);
     void getMinMax();
     void drawBars();
     void drawEverything();

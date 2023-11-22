@@ -1,8 +1,6 @@
 #include "DataFuncs.h"
 #include <iostream>
 #include <sstream>
-#include <cmath>
-#include <iomanip>
 
 
 
@@ -174,21 +172,31 @@ void Plot::getMinMax() //Gets min and max values of the yData set
 
 void Plot::drawPlot() //Draws the base plot for the data
 {
-    const double numberTicks = (yLimit / 50); 
-    double width = 10;
-    double tickX = standardStart - width;
-    double tickY = standardStart;
-
     drawRect(standardStart, 10, standardStart, yLimit); //Axes
     drawRect(standardStart + yLimit, xLimit, standardStart, 10);
+    drawYticks();
+}
 
+void Plot::drawYticks()
+{
+    const double numberTicks = (yLimit / 75);
+    const double width = 10;
+    const double tickX = standardStart - width;
+    double tickY = standardStart;
     for (int i = 0; i < numberTicks; i++) // Axis Y ticks & numbers
     {
         string numberLabel = to_string(int(maxVal - ((maxVal / numberTicks) * i)));
         drawRect(tickY, width, tickX, 1);
-        drawText(tickX - 20, tickY -12, numberLabel);
+        drawText(tickX - 20, tickY - 12, numberLabel);
         tickY += yLimit / numberTicks;
     }
+}
+
+void Plot::drawXticks(double xPos)
+{
+    const double tickY = standardStart + yLimit +10;
+    drawRect(tickY, 1, xPos, 10);
+    drawText(xPos-9, tickY+10, "hil");
 }
 
 void Plot::drawBars()//Draws the bars for each given data point
@@ -205,6 +213,7 @@ void Plot::drawBars()//Draws the bars for each given data point
         double yPos = HEIGHT - standardStart - height;
 
         drawRect(yPos, barWidth, xPos, height);
+        drawXticks(xPos+(barWidth/2));
     }
 }
 
