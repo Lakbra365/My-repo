@@ -6,17 +6,40 @@
 #include <fstream>
 #include "SDL.h"
 
+
+
 using namespace std;
 
 class VIZ
 {
+private:
     SDL_Window* win;
     SDL_Renderer* renderer;
 
+protected:
+    double xLimit;
+    double yLimit;
+    double standardStart = 100;
+    TTF_Font* font;
+
 public:
     VIZ();
-
+    void drawText(double posX, double posY, string text);
     void drawRect(double posY, double width, double posX = 100, double height = 10);
+};
+
+class Plot: public VIZ
+{
+private:
+    vector<double> yData;
+    double minVal;
+    double maxVal;
+public:
+    Plot(vector<double> Data);
+    void drawPlot();
+    void getMinMax();
+    void drawBars();
+    void drawEverything();
 };
 
 class DataManager
@@ -29,12 +52,12 @@ public:
 };
 
 
-class Plot: public DataManager
+class TeamsData: public DataManager
 {
 private:
     string labels;
     vector<double> xData;
 public:
-    Plot(regex command);
+    TeamsData(regex command);
     
 };

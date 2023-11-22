@@ -1,6 +1,8 @@
 #include "DataFuncs.h"
 #include <iostream>
 #include <sstream>
+#include <SDL_ttf.h>
+
 
 #define WIDTH 1366
 #define HEIGHT 803
@@ -51,7 +53,7 @@ void DataManager::parseSpecificData(regex regexP, vector<double>& specificData) 
     }
 }
 
-Plot::Plot(regex command)
+TeamsData::TeamsData(regex command)
 {
     parseSpecificData(command, xData);
 }
@@ -59,9 +61,24 @@ Plot::Plot(regex command)
 VIZ::VIZ()
 {
     // returns zero on success else non-zero
+    xLimit = WIDTH - 200;
+    yLimit = HEIGHT - 200;
+
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
         printf("error initializing SDL: %s\n", SDL_GetError());
+    }
+    if (TTF_Init() < 0)
+    {
+        printf("error initializing SDL_ttf: %s\n", TTF_GetError());
+        return;
+    }
+    font = TTF_OpenFont("C:/Users/zombi/Documents/My folders/Classes/3 semester/AERSP 424/Homework2/My-repo/FINAL PROJECT/Project1/OpenSans_SemiCondensed-Regular.ttf", 16);
+    if (!font)
+    {
+        printf("error loading font: %s\n", TTF_GetError());
+        TTF_Quit();
+        return;
     }
 
     win = SDL_CreateWindow("Football Stats", // creates a window
@@ -73,10 +90,10 @@ VIZ::VIZ()
 
     SDL_RenderClear(renderer);
 
-    //SDL_RenderPresent(renderer);
+    SDL_RenderPresent(renderer);
 }
 
-void VIZ::drawRect(double posY, double width, double posX, double height)
+void VIZ::drawRect(double posY, double width, double posX, double height) //Creates a rectangle of set color in the visualizer
 {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 
@@ -88,4 +105,111 @@ void VIZ::drawRect(double posY, double width, double posX, double height)
 
     SDL_RenderFillRect(renderer, &rect);
     SDL_RenderPresent(renderer);
+}
+
+void VIZ::drawText(double posX, double posY, string text)
+{
+
+    SDL_Color textColor = { 0,0,0,255 };
+
+    SDL_Surface* textSurface = TTF_RenderText_Solid(font, text.c_str(), textColor); // Render the desired text
+    if (!textSurface)
+    {
+        printf("error rendering text: %s\n", TTF_GetError());
+        TTF_CloseFont(font);
+        TTF_Quit();
+        return;
+    }
+    SDL_Texture* textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
+    if (!textTexture)
+    {
+        printf("error creating texture: %s\n", SDL_GetError());
+        SDL_FreeSurface(textSurface);
+        TTF_CloseFont(font);
+        TTF_Quit();
+        return;
+    }
+
+    // Free the surface
+    SDL_FreeSurface(textSurface);
+
+    // Render the text texture to the screen
+    SDL_Rect textRect = { posX, posY, textSurface->w, textSurface->h }; // Position the text on the screen
+    SDL_RenderCopy(renderer, textTexture, NULL, &textRect);
+
+    // Present the renderer
+    SDL_RenderPresent(renderer);
+
+    // Clean up font resources
+    TTF_CloseFont(font);
+    TTF_Quit();
+}
+
+
+Plot::Plot(vector<double> data) :VIZ()
+{
+    yData = data;
+    drawEverything();
+}
+
+void Plot::getMinMax() //Gets min and max values of the yData set
+{
+    minVal = yData[0];
+    maxVal = yData[0];
+    for (double element : yData)
+    {
+        if (maxVal < element)
+        {
+            maxVal = element;
+        }
+        else if (minVal > element)
+        {
+            minVal = element;
+        }
+    }
+    cout << "min: " << minVal << endl;
+    cout << "max: " << maxVal << endl;
+}
+
+void Plot::drawPlot() //Draws the base plot for the data
+{
+    const double conversionRate = (yLimit / 100);
+
+    drawRect(standardStart, 10, standardStart, yLimit);
+    drawRect(standardStart + yLimit, xLimit, standardStart, 10);
+
+    for (int i = 0; i < conversionRate; i++)
+    {
+        double width = 10;
+        double tickX = standardStart - width;
+        double tickY = standardStart * (i + 1);
+        string numberLabel = to_string(int(maxVal - ((maxVal / conversionRate) * i)));
+
+        drawRect(tickY, width, tickX, 1);
+        drawText(tickX - 20, tickY -12, numberLabel);
+    }
+}
+
+void Plot::drawBars()//Draws the bars for each given data point
+{
+    const double conversionRate = yLimit / maxVal;
+    const double barWidth = 20;
+    const double barSeparation = (xLimit - (barWidth*yData.size()))/yData.size();
+    
+
+    for (int i = 0; i < yData.size(); i++)
+    {
+        double xPos = standardStart + (barWidth*i) +(barSeparation* (i+1));
+        double height = yData[i] * conversionRate;
+        double yPos = HEIGHT - standardStart - height;
+
+        drawRect(yPos, barWidth, xPos, height);
+    }
+}
+
+void Plot::drawEverything() //Encapsulates all plot necessary plot functions into a single organized function
+{
+    getMinMax();
+    drawPlot();
+    drawBars();
 }
