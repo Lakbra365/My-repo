@@ -1,15 +1,15 @@
-﻿  Logic classes.cpp
-C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(41,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(50,23): warning C4018: '<': signed/unsigned mismatch
-C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(94,14): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(95,14): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(96,14): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(97,14): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(137,27): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
-C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(137,27): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(137,33): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
-C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(137,33): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(209,23): warning C4018: '<': signed/unsigned mismatch
-  Main.cpp
-  Generating Code...
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Project1 (1).vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Logic classes.cpp
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(86,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(95,23): warning C4018: '<': signed/unsigned mismatch
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(98,27): warning C4018: '<': signed/unsigned mismatch
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(144,14): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(145,14): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(146,14): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(147,14): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(187,27): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(187,27): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(187,33): warning C4838: conversion from 'double' to 'int' requires a narrowing conversion
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(187,33): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Project1\Logic classes.cpp(239,23): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   Project1.vcxproj -> C:\Users\zombi\Documents\My folders\Classes\3 semester\AERSP 424\Homework2\My-repo\FINAL PROJECT\Debug\Project1.exe

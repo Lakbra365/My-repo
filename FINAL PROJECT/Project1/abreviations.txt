@@ -1,0 +1,20 @@
+Chelsea,CHE
+Manchester City,MCI
+Liverpool,LIV
+West Ham United,WHU
+Arsenal,ARS
+Wolverhampton,WLV
+Tottenham Hotspur,TOT
+Manchester United,MUN
+Brighton & Hove Albion,BRH
+Crystal Palace,CRY
+Everton,EVE
+Leicester City,LEI
+Southampton,SOU
+Brentford,BRE
+Aston Villa,AVA
+Watford,WAT
+Leeds United,LEE
+Burnley,BUR
+Norwich City,NOR
+Newcastle United,NEW

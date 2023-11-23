@@ -2,15 +2,58 @@
 #include <iostream>
 #include <sstream>
 
-
-
 #define WIDTH 1366
 #define HEIGHT 803
 
-
 using namespace std;
 
-void DataManager :: parseCSVData(ifstream& infile) //Gets a csv file and turns it into a 2D list
+Instructions::Instructions(char& desiredData)
+{
+    cout << " Type the data you want to see\n"
+        << "M: for # of played matches by teams\n"
+        << "P: for # of points by teams\n"
+        << "G: for # of goals by teams\n"
+        << "W: for # of wins by teams\n"
+        << "L: for # of losses by teams\n"
+        << "D: for # of draws by teams\n";
+    cin >> desiredData;
+    bool quit = false;
+    while (!quit)
+    {
+        switch (desiredData)
+        {
+        case 'M':
+        case 'D':
+        case'G':
+        case'W':
+        case'L':
+        case'P':
+            quit = true;
+            break;
+        default:
+            cout << "Invalid choice, Please choose a valid character" << endl;
+            cout << " Type the data you want to see\n"
+                << "M: for # of played matches by teams\n"
+                << "P: for # of points by teams\n"
+                << "G: for # of goals by teams\n"
+                << "W: for # of wins by teams\n"
+                << "L: for # of losses by teams\n"
+                << "D: for # of draws by teams\n";
+            cin >> desiredData;
+        }
+    }
+
+}
+
+DataManager::DataManager(regex command)
+{
+    parseSpecificData(command, xData);
+
+    Plot plot(xData);
+
+}
+
+void DataManager :: parseCSVData(ifstream& infile,vector<vector<string>>& generalData) //Gets a csv file and turns it into a 2D list
 {
     string line;
     while (getline(infile, line, '\n')) //Makes each line a part of a vector
@@ -28,14 +71,16 @@ void DataManager :: parseCSVData(ifstream& infile) //Gets a csv file and turns i
 }
 
 
-void DataManager::parseSpecificData(regex regexP, vector<double>& specificData) //Makes a list of values based on a regex condition of a 2D list
+void DataManager::parseSpecificData(regex regexP, map<string, double>& specificData) //Makes a list of values based on a regex condition of a 2D list
 {
     int indexDesired = -1;
 
     //remove after test
-    ifstream infile;
+    ifstream infile,abrv;
     infile.open("csvText.txt");
-    parseCSVData(infile);
+    abrv.open("abreviations.txt");
+    parseCSVData(infile,generalData);
+    parseCSVData(abrv,abreviations);
     //end remove
 
     for (int i = 0; i < generalData[0].size(); i++)
@@ -49,14 +94,19 @@ void DataManager::parseSpecificData(regex regexP, vector<double>& specificData) 
 
     for (int i = 1; i < generalData.size(); i++) //stores all values from 2D list that belong to the sotred index in a list 
     {
-        specificData.push_back(stoi(generalData[i][indexDesired]));
+        string abreviation;
+        for (int j = 0; j < abreviations.size();j++)
+        {
+            if (abreviations[j][0] == generalData[i][0])
+            {
+                abreviation = abreviations[j][1];
+                break;
+            }
+        }
+        specificData[abreviation] = (stoi(generalData[i][indexDesired]));
     }
 }
 
-TeamsData::TeamsData(regex command)
-{
-    parseSpecificData(command, xData);
-}
 
 VIZ::VIZ()
 {
@@ -103,7 +153,7 @@ void VIZ::drawRect(double posY, double width, double posX, double height) //Crea
 void VIZ::drawText(double posX, double posY, string text) //All necessary code for rendering a line of text in SDL window
 {
     //Font file location
-    TTF_Font* font = TTF_OpenFont("C:/Users/zombi/Documents/My folders/Classes/3 semester/AERSP 424/Homework2/My-repo/FINAL PROJECT/Project1/OpenSans_SemiCondensed-Regular.ttf", 16);
+    TTF_Font* font = TTF_OpenFont("OpenSans_SemiCondensed-Regular.ttf", 16);
     if (!font) 
     {
         printf("error loading font: %s\n", TTF_GetError());
@@ -145,7 +195,7 @@ void VIZ::drawText(double posX, double posY, string text) //All necessary code f
 }
 
 
-Plot::Plot(vector<double> data) :VIZ()
+Plot::Plot(map<string,double> data) :VIZ()
 {
     yData = data;
     drawEverything();
@@ -153,17 +203,17 @@ Plot::Plot(vector<double> data) :VIZ()
 
 void Plot::getMinMax() //Gets min and max values of the yData set
 {
-    minVal = yData[0];
-    maxVal = yData[0];
-    for (double element : yData)
+    minVal = 10000;
+    maxVal = -10000;
+    for (auto element : yData)
     {
-        if (maxVal < element)
+        if (maxVal < element.second)
         {
-            maxVal = element;
+            maxVal = element.second;
         }
-        else if (minVal > element)
+        else if (minVal > element.second)
         {
-            minVal = element;
+            minVal = element.second;
         }
     }
     cout << "min: " << minVal << endl;
@@ -185,18 +235,23 @@ void Plot::drawYticks()
     double tickY = standardStart;
     for (int i = 0; i < numberTicks; i++) // Axis Y ticks & numbers
     {
-        string numberLabel = to_string(int(maxVal - ((maxVal / numberTicks) * i)));
+        double initValue = (maxVal - ((maxVal / numberTicks) * i));
+        int wholePart = initValue;
+        int decimalPart = int(initValue * 10) - wholePart * 10;
+        string dispNum = to_string(wholePart) + "." + to_string(decimalPart);
+        cout << dispNum<<endl;
+        string numberLabel = dispNum;
         drawRect(tickY, width, tickX, 1);
-        drawText(tickX - 20, tickY - 12, numberLabel);
+        drawText(tickX - 30, tickY - 12, numberLabel);
         tickY += yLimit / numberTicks;
     }
 }
 
-void Plot::drawXticks(double xPos)
+void Plot::drawXticks(double xPos, string abrv)
 {
     const double tickY = standardStart + yLimit +10;
     drawRect(tickY, 1, xPos, 10);
-    drawText(xPos-9, tickY+10, "hil");
+    drawText(xPos-9, tickY+10, abrv);
 }
 
 void Plot::drawBars()//Draws the bars for each given data point
@@ -205,15 +260,16 @@ void Plot::drawBars()//Draws the bars for each given data point
     const double barWidth = 20;
     const double barSeparation = (xLimit - (barWidth*yData.size()))/yData.size();
     
-
-    for (int i = 0; i < yData.size(); i++) //Bars
+    int i = 0;
+    for (auto element: yData ) //Bars
     {
         double xPos = standardStart + (barWidth*i) +(barSeparation* (i+1));
-        double height = yData[i] * conversionRate;
+        double height = element.second * conversionRate;
         double yPos = HEIGHT - standardStart - height;
 
         drawRect(yPos, barWidth, xPos, height);
-        drawXticks(xPos+(barWidth/2));
+        drawXticks(xPos+(barWidth/2), element.first);
+        i++;
     }
 }
 

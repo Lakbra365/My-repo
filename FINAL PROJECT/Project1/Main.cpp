@@ -6,20 +6,11 @@
 using namespace std; 
 int main(int argc, char** argv)
 {
-	DataManager test;
-	regex pattern("G$");
-	vector<double> specificData;
-	test.parseSpecificData(pattern, specificData);
-	cout << "[";
-	for (const auto& row : specificData)
-	{
-		cout << row << ", ";
-	}
-	cout << "]"<< endl;
-	// Parsed data code ends here
-
-	Plot plot(specificData);
-	//code for drawing plot ends here
+	char desiredData;
+	Instructions instruct(desiredData);
+	string desiredString = string(1,desiredData) + "$";
+	regex pattern(desiredString);
+	DataManager teamsData(pattern);
 	bool quit = false;
 
 	//Handling of quit events
